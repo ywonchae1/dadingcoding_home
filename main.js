@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const port = 3000;
+const path = require('path');
 
 app.use(express.static(__dirname + '/my-app/build'));
 
@@ -13,14 +14,11 @@ const teacherRouter = require("./_routers/teacherRouter.js");
 
 //홈페이지
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, '/react-project/build/index.html'));
+  res.sendFile(path.join(__dirname, '/my-app/build/index.html'));
 });
 
 //선생님 페이지
-//app.use("/teacher", teacherRouter);
-app.get('/teacher', (req, res) => {
-  res.send('teacher page');
-});
+app.use("/teacher", teacherRouter);
 
 //학생 페이지
 app.get('/student', (req, res) => {
