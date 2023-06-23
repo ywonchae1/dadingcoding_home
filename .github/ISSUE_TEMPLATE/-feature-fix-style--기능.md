@@ -1,5 +1,5 @@
 ---
-name: Custom issue template
+name: "[FEATURE/FIX/STYLE] 기능"
 about: Describe this issue template's purpose here.
 title: ''
 labels: ''
