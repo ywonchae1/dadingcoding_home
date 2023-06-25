@@ -1,9 +1,8 @@
-const path = require('path');
 const teacherModel = require("../models/teacherModel.js");
 
 module.exports = {
     teacherPage: async(req, res) => {
-        let teacherInfo = teacherModel.getInfoById(req.params.id);
-        res.json(teacherInfo);
+        let teacherInfo = await teacherModel.getInfoById(req.params.tid);
+        res.render('user/userLayout.ejs', {info: teacherInfo});
     }
 };
