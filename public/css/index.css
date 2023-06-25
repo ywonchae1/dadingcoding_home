@@ -1,5 +1,12 @@
 /* 전체 스타일 */
 
+:root {
+  --dc-blue-dark: #06283D;
+  --dc-green: #256D85;
+  --dc-blue: #47B5FF;
+  --dc-blue-ligt: #DFF6FF;
+}
+
 body {
   margin: 0;
   font-family: 'Hahmlet', serif;
@@ -22,6 +29,32 @@ h1, h2, h3, h4, h5, h6, p {
   height: 3rem;
 }
 
-.side-max-width {
-  max-width: 15rem;
+.sidebar {
+  padding: 5%;
+  width: 30%;
+  overflow: auto;
+}
+
+.sidebar a {
+  text-decoration: none;
+  display: block;
+  padding: 2%;
+  color: var(--dc-blue-dark);
+}
+
+.sidebar a:hover {
+  text-decoration: none;
+  display: block;
+  padding: 2%;
+  background-color: var(--dc-blue-ligt);
+}
+
+.content-mypage {
+  padding: 2.9% 5% 2% 0;
+  width: 70%;
+  overflow: auto;
+}
+
+.content-mypage .title {
+  color: var(--dc-blue-dark);
 }
