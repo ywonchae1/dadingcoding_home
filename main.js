@@ -1,24 +1,25 @@
 const express = require('express');
 const app = express();
-const port = 3000;
-const path = require('path');
 const bodyParser = require("body-parser");  
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-app.use(express.static(__dirname + '/my-app/build'));
+const teacherRouter = require("./routers/teacherRouter.js");
 
-//DB 사용을 위한
-app.use(express.json());
-const cors = require('cors');
-app.use(cors());
+//View
+const layouts = require("express-ejs-layouts");
+app.set("view engine", "ejs");
+app.use(layouts);
 
-const teacherRouter = require("./_routers/teacherRouter.js");
+app.set("port", process.env.PORT || 3000);
+
+app.use(express.static("public"));
+app.use(express.urlencoded({ extended: false }));
 
 //홈페이지
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, '/my-app/build/index.html'));
+  res.render('home');
 });
 
 //선생님 페이지
@@ -49,11 +50,6 @@ app.get('/login', (req, res) => {
   res.send('login page');
 });
 
-app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
-});
-
-//리엑트 라우팅을 위한
-app.get('*', function (req, res) {
-  res.sendFile(path.join(__dirname, '/my-app/build/index.html'));
+app.listen(app.get('port'), () => {
+  console.log(`Example app listening on port ${app.get('port')}`)
 });

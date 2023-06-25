@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const teacherController = require("../_controllers/studentController");
+const teacherController = require("../controllers/studentController");
 
 router.use((req, res) => {
     console.log("Router for student page was started");
