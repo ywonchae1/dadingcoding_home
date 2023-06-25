@@ -19,7 +19,7 @@ app.use(express.urlencoded({ extended: false }));
 
 //홈페이지
 app.get('/', (req, res) => {
-  res.render('home');
+  res.render('home.ejs');
 });
 
 //선생님 페이지
