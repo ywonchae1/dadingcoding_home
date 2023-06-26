@@ -8,8 +8,18 @@ router.use((req, res, next) => {
 });
 
 router.get(
-    '/:tid',
+    '/settings',
     teacherController.teacherPage
+);
+
+router.get(
+    '/schedules',
+    teacherController.teacherSchedule
+);
+
+router.get(
+    '/attend',
+    //teacherController.teacherPage
 );
 
 module.exports = router;

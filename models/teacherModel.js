@@ -16,5 +16,29 @@ module.exports = {
         } catch(err) {
             return err;
         }
+    },
+
+    getScheduleById: async(id) => {
+        try {
+            let rawQuery = `
+            SELECT c_id, c_tid, c_sid, c_datetime,
+            CASE WEEKDAY('20160118') 
+            WHEN '0' THEN '월요일'
+            WHEN '1' THEN '화요일'
+            WHEN '2' THEN '수요일'
+            WHEN '3' THEN '목요일'
+            WHEN '4' THEN '금요일'
+            WHEN '5' THEN '토요일'
+            WHEN '6' THEN '일요일'
+            END as weekday,
+            DATE_FORMAT(c_datetime, '%H : %i') as time
+            FROM classes
+            WHERE c_tid=?`
+            let res = await db.query(rawQuery, [id]);
+            console.log(res[0]);
+            return res[0][0];
+        } catch(err) {
+            return err;
+        }
     }
 }
