@@ -1,17 +1,6 @@
-<div style="display: flex;">
-    <span class="sidebar">
-        <h3>Menu</h3>
-        <hr>
-        <a href="#">Settings</a>
-        <a href="#">Schedule</a>
-        <a href="#">Attendence</a>
-    </span>
-
-    <span class="content-mypage">
-        <label class="fs-1 fw-bold title">안녕하세요 <%= info.name %>님!</label>
-        <hr>
-        <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum scelerisque ex ipsum, vitae iaculis mi venenatis nec. Praesent eget magna viverra, egestas nulla quis, maximus mi. Nam eleifend ex eu turpis tincidunt, sit amet lobortis arcu feugiat. Nunc interdum ipsum vitae imperdiet tempor. Nullam commodo elit vel odio tristique, et ultrices metus aliquet. Suspendisse sed felis dignissim nulla commodo aliquet vitae in ex. Donec scelerisque hendrerit ullamcorper. Pellentesque eget lacus in elit lacinia mattis. Etiam sollicitudin pretium lorem vitae semper. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Curabitur et elit neque.
-        </p>
-    </span>
+<div class="d-flex">
+   <%- include('./sidebar.ejs') %>
+    <div class="content-mypage">
+        <%- include(content, {info: info}) %>
+    </div>
 </div>
