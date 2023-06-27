@@ -69,6 +69,7 @@
 
 .noColor {
   background: #eee;
+  color: gray !important;
 }
 
 .header {
@@ -78,9 +79,14 @@
 }
 
 /* 좌우 버튼 */
-.btn {
+.calendar-btn {
   font-size: 3rem;
   margin-top: 18px;
+  cursor: pointer;
+}
+
+.calendar-btn:hover {
+  color: var(--dc-blue);
 }
 
 /* ---- */
@@ -93,4 +99,9 @@
 
 .dateHead {
   margin: .4rem 0;
+}
+
+.grid p {
+  margin: 0;
+  margin-bottom: 0;
 }

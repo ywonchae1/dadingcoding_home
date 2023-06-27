@@ -31,12 +31,13 @@ module.exports = {
             WHEN '5' THEN '토요일'
             WHEN '6' THEN '일요일'
             END as weekday,
-            DATE_FORMAT(c_datetime, '%H : %i') as time
+            DATE_FORMAT(c_datetime, '%H : %i') AS time,
+            MONTH(c_datetime) AS month,
+            DAY(c_datetime) AS day
             FROM classes
             WHERE c_tid=?`
             let res = await db.query(rawQuery, [id]);
-            console.log(res[0]);
-            return res[0][0];
+            return res[0];
         } catch(err) {
             return err;
         }
