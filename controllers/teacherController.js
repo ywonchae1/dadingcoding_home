@@ -18,6 +18,7 @@ module.exports = {
 
     teacherSchedule: async(req, res) => {
         let teacherSchedules = await teacherModel.getScheduleById(id);
+        console.log(teacherSchedules);
         
         res.render(
             'user/userLayout.ejs',
