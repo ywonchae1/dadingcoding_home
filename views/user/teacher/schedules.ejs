@@ -4,7 +4,11 @@
 
 <div>
     <label class="fs-1 fw-bold title">나의 수업 일정</label>
-    <h3>매주 <%= info[0].weekday %> <%= info[0].time %></h3>
+    <% if (info[0] == undefined) { %>
+        <h3>예정된 수업 일정이 없습니다.</h3>
+    <% } else { %>
+        <h3>매주 <%= info[0].weekday %> <%= info[0].time %></h3>
+    <% } %>
     <input type="hidden" id="jsonClasses" value="<%= JSON.stringify(info) %>">
 
     <div class='rap'>

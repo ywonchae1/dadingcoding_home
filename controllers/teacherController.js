@@ -1,7 +1,7 @@
 const teacherModel = require("../models/teacherModel.js");
 
 //나중에 쿠키로 변경해야 함
-const id = 'ywonchae1';
+const id = 'ywonchae';
 
 module.exports = {
     teacherPage: async(req, res) => {
@@ -18,7 +18,6 @@ module.exports = {
 
     teacherSchedule: async(req, res) => {
         let teacherSchedules = await teacherModel.getScheduleById(id);
-        console.log(teacherSchedules);
         
         res.render(
             'user/userLayout.ejs',
