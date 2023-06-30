@@ -28,6 +28,24 @@ module.exports = {
         );
     },
 
+    teacherAppt: async(req, res) => {
+        let teacherAppts = await teacherModel.getApptById(id);
+
+        res.render(
+            'user/userLayout.ejs',
+            {
+                content: 'teacher/appointment.ejs',
+                info: teacherAppts
+            }
+        )
+    },
+
+    teacherAddAppt: async(req, res) => {
+        console.log(req);
+        await teacherModel.insertAppt();
+        res.send('success');
+    },
+
     teacherRegister: async(req, res) => {
     }
 };
