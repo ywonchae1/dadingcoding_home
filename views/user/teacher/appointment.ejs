@@ -92,27 +92,27 @@
     <div class="col-md-12 col-lg-6">
 
       <% let timeHTML='' ; %>
-        <% info.forEach(time=> { %>
-          <% timeHTML +=`<form action="" class="timeform">
-            <div class="row p-2"><input name="ttId" value=${time.tt_id} hidden>
-              <div class="col">${time.tt_day}&nbsp;&nbsp;${time.form_tt_start}&nbsp;<i
-                  class="ri-arrow-right-line"></i>&nbsp;${time.form_tt_end}</div>
-              <div class="col"><button class="delete"><i class="ri-delete-bin-line"></i></button></div>
-            </div>
-            </form>` %>
+      <% info.forEach(time=> { %>
+        <% timeHTML +=`<div class='delete-item'><div class="row p-2"><input name="ttId" value=${time.tt_id} hidden>
+            <div class="col">${time.tt_day}&nbsp;&nbsp;${time.form_tt_start}&nbsp;<i
+                class="ri-arrow-right-line"></i>&nbsp;${time.form_tt_end}</div>
+            <div class="col"><button class="delete"><i class="ri-delete-bin-line"></i></button></div>
+          </div></div>` %>
       <% }); %>
 
       <div class="d-grid my-5 able-board">
-        <div class="row mb-5">
-          <div class="col fs-4">등록된 시간</div>
-          <div class="col"><button class="btn-blue-light" type="submit">변경 사항 적용</button>
+        <form action="confirmAbleTime" method="post">
+          <div class="row mb-5">
+            <div class="col fs-4">등록된 시간</div>
+            <div class="col"><button class="btn-blue-light" type="submit">변경 사항 적용</button>
+            </div>
           </div>
-        </div>
-        <%- timeHTML %>
-        <div class="row my-2">
-          <div class="col">------ 새로운 일정 ------</div>
-        </div>
-        <div id="newAvailable"></div>
+          <%- timeHTML %>
+          <div class="row my-2">
+            <div class="col">------ 새로운 일정 ------</div>
+          </div>
+          <div id="newAvailable"></div>
+        </form>
       </div>
 
     </div>
