@@ -6,6 +6,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 const teacherRouter = require("./routers/teacherRouter.js");
+const studentRouter = require("./routers/studentRouter.js");
 
 //View
 const layouts = require("express-ejs-layouts");
@@ -26,9 +27,7 @@ app.get('/', (req, res) => {
 app.use("/teacher", teacherRouter);
 
 //학생 페이지
-app.get('/student', (req, res) => {
-    res.send('student page');
-});
+app.use('/student', studentRouter);
 
 //About Us
 app.get('/about', (req, res) => {
