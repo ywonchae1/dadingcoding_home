@@ -6,7 +6,7 @@ module.exports = {
     getInfoById: async(id) => {
         try {
             let rawQuery = `
-            SELECT *
+            SELECT *, DATE_FORMAT(t_birth, '%Y-%m-%d') AS birth_format
             FROM teachers
             JOIN accounts
             ON t_id=id
@@ -22,7 +22,7 @@ module.exports = {
         try {
             let rawQuery = `
             SELECT c_id, c_tid, c_sid, c_datetime,
-            CASE WEEKDAY('20160118') 
+            CASE WEEKDAY(c_datetime)
             WHEN '0' THEN '월요일'
             WHEN '1' THEN '화요일'
             WHEN '2' THEN '수요일'
@@ -37,6 +37,7 @@ module.exports = {
             FROM classes
             WHERE c_tid=?`
             let res = await db.query(rawQuery, [id]);
+            console.log(res[0]);
             return res[0];
         } catch(err) {
             return err;
