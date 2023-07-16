@@ -6,7 +6,7 @@ module.exports = {
     getInfoById: async(id) => {
         try {
             let rawQuery = `
-            SELECT *
+            SELECT *, DATE_FORMAT(s_birth, '%Y-%m-%d') AS birth_format
             FROM students
             JOIN accounts
             ON s_id=id
@@ -22,7 +22,7 @@ module.exports = {
         try {
             let rawQuery = `
             SELECT c_id, c_tid, c_sid, c_datetime,
-            CASE WEEKDAY('20160118') 
+            CASE WEEKDAY(c_datetime) 
             WHEN '0' THEN '월요일'
             WHEN '1' THEN '화요일'
             WHEN '2' THEN '수요일'
@@ -47,7 +47,7 @@ module.exports = {
         try {
             let rawQuery = `
             SELECT st_id, st_sid, st_day, st_start, st_end,
-            TIME_FORMAT(st_start, '%H:%i') AS form_tt_start, TIME_FORMAT(st_end, '%H:%i') AS form_tt_end
+            TIME_FORMAT(st_start, '%H:%i') AS form_st_start, TIME_FORMAT(st_end, '%H:%i') AS form_st_end
             FROM able_stimes
             WHERE st_sid=?`
             let res = await db.query(rawQuery, [id]);
@@ -94,9 +94,9 @@ module.exports = {
             for(let j = 0; j < appt.length; j++) {
                 apptList.push(appt[j]['st_id']);
             }
-            console.log(apptList, data['ttId']);
+            console.log(apptList, data['stId']);
             for(let i = 0; i < apptList.length; i++) {
-                if(data['ttId'].indexOf(String(apptList[i])) == -1) {
+                if(data['stId'].indexOf(String(apptList[i])) == -1) {
                     // data 리스트에 없는 경우 : 삭제해야 함
                     await db.query(rawQuery, [apptList[i]]);
                 }
