@@ -93,9 +93,9 @@
 
       <% let timeHTML='' ; %>
       <% info.forEach(time=> { %>
-        <% timeHTML +=`<div class='delete-item'><div class="row p-2"><input name="ttId" value=${time.tt_id} hidden>
-            <div class="col">${time.tt_day}&nbsp;&nbsp;${time.form_tt_start}&nbsp;<i
-                class="ri-arrow-right-line"></i>&nbsp;${time.form_tt_end}</div>
+        <% timeHTML +=`<div class='delete-item'><div class="row p-2"><input name="stId" value=${time.st_id} hidden>
+            <div class="col">${time.st_day}&nbsp;&nbsp;${time.form_st_start}&nbsp;<i
+                class="ri-arrow-right-line"></i>&nbsp;${time.form_st_end}</div>
             <div class="col"><button type='button' class="delete"><i class="ri-delete-bin-line"></i></button></div>
           </div></div>` %>
       <% }); %>
