@@ -1,6 +1,36 @@
 let cnt = 0;
 let deleteButtons = '';
 
+function calcTime(start, end) {
+    let startHour = 0;
+    let startMin = 0;
+    let endHour = 0;
+    let endMin = 0;
+
+    for(let i = 0; i < 2; i++) {
+        startHour *= 10;
+        startHour += Number(start[i]);
+        endHour *= 10;
+        endHour += Number(end[i]);
+    }
+
+    startHour *= 60;
+    endHour *= 60;
+
+    for(let i = 3; i < 5; i++) {
+        startMin *= 10;
+        startMin += Number(start[i]);
+        endMin *= 10;
+        endMin += Number(end[i]);
+    }
+    
+    let startTotal = startHour + startMin;
+    let endTotal = endHour + endMin;
+    console.log(endTotal, startTotal);
+    console.log(endTotal - startTotal);
+    if(endTotal - startTotal >= 120) return false;
+    else return true; //120분 이상이 아니라면 알림창을 띄우기 위해
+}
 
 document.addEventListener('DOMContentLoaded', () => {
     //추가한 일정 삭제
@@ -17,6 +47,8 @@ document.addEventListener('DOMContentLoaded', () => {
         let endTime = document.querySelector('#sun_end').value;
         if(startTime > endTime) {
             window.alert('입력 값이 잘못되었습니다.');
+        } else if(calcTime(startTime, endTime)) {
+            window.alert('2시간 이상 입력해 주세요.');
         } else if(startTime !== '' && endTime !== '') {
             let newElement = document.createElement('div');
             newElement.innerHTML = (`<div class='delete-item'><div class="row p-2">
@@ -49,6 +81,8 @@ document.addEventListener('DOMContentLoaded', () => {
         let endTime = document.querySelector('#mon_end').value;
         if(startTime > endTime) {
             window.alert('입력 값이 잘못되었습니다.');
+        } else if(calcTime(startTime, endTime)) {
+            window.alert('2시간 이상 입력해 주세요.');
         } else if(startTime !== '' && endTime !== '') {
             let newElement = document.createElement('div');
             newElement.innerHTML = (`<div class='delete-item'><div class="row p-2">
@@ -81,6 +115,8 @@ document.addEventListener('DOMContentLoaded', () => {
         let endTime = document.querySelector('#tue_end').value;
         if(startTime > endTime) {
             window.alert('입력 값이 잘못되었습니다.');
+        } else if(calcTime(startTime, endTime)) {
+            window.alert('2시간 이상 입력해 주세요.');
         } else if(startTime !== '' && endTime !== '') {
             let newElement = document.createElement('div');
             newElement.innerHTML = (`<div class='delete-item'><div class="row p-2">
@@ -113,6 +149,8 @@ document.addEventListener('DOMContentLoaded', () => {
         let endTime = document.querySelector('#wed_end').value;
         if(startTime > endTime) {
             window.alert('입력 값이 잘못되었습니다.');
+        } else if(calcTime(startTime, endTime)) {
+            window.alert('2시간 이상 입력해 주세요.');
         } else if(startTime !== '' && endTime !== '') {
             let newElement = document.createElement('div');
             newElement.innerHTML = (`<div class='delete-item'><div class="row p-2">
@@ -145,6 +183,8 @@ document.addEventListener('DOMContentLoaded', () => {
         let endTime = document.querySelector('#thu_end').value;
         if(startTime > endTime) {
             window.alert('입력 값이 잘못되었습니다.');
+        } else if(calcTime(startTime, endTime)) {
+            window.alert('2시간 이상 입력해 주세요.');
         } else if(startTime !== '' && endTime !== '') {
             let newElement = document.createElement('div');
             newElement.innerHTML = (`<div class='delete-item'><div class="row p-2">
@@ -177,6 +217,8 @@ document.addEventListener('DOMContentLoaded', () => {
         let endTime = document.querySelector('#fri_end').value;
         if(startTime > endTime) {
             window.alert('입력 값이 잘못되었습니다.');
+        } else if(calcTime(startTime, endTime)) {
+            window.alert('2시간 이상 입력해 주세요.');
         } else if(startTime !== '' && endTime !== '') {
             let newElement = document.createElement('div');
             newElement.innerHTML = (`<div class='delete-item'><div class="row p-2">
@@ -209,6 +251,8 @@ document.addEventListener('DOMContentLoaded', () => {
         let endTime = document.querySelector('#sat_end').value;
         if(startTime > endTime) {
             window.alert('입력 값이 잘못되었습니다.');
+        } else if(calcTime(startTime, endTime)) {
+            window.alert('2시간 이상 입력해 주세요.');
         } else if(startTime !== '' && endTime !== '') {
             let newElement = document.createElement('div');
             newElement.innerHTML = (`<div class='delete-item'><div class="row p-2">
@@ -245,7 +289,7 @@ document.addEventListener('DOMContentLoaded', () => {
         for(let i = 0; i < 7; i++) {
             const start = document.querySelector(startTimeInputIds[i]);
             const end = document.querySelector(endTimeInputIds[i]);
-            if((start.value < end.value) && (start.value !== '' && end.value !== '')) {
+            if((start.value < end.value) && (start.value !== '' && end.value !== '') && calcTime(start.value, end.value) === false) {
                 let newElement = document.createElement('div');
                 newElement.innerHTML = (`<div class='delete-item'><div class="row p-2">
                 <input type="text" name="new" hidden value="${cnt++}">

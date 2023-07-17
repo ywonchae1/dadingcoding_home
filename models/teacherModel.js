@@ -60,18 +60,64 @@ module.exports = {
 
     insertAppt: async(id, data) => {
         try {
-            let rawQuery = `
+            let insertRawQuery = `
             INSERT INTO able_ttimes (tt_tid, tt_day, tt_start, tt_end)
-            VALUES (?, ?, ?, ?);
-            `
+            VALUES (?, ?, ?, ?);`;
+
+            let updateRawQuery = `
+            UPDATE able_ttimes
+            SET tt_start=?, tt_end=?
+            WHERE tt_tid=? AND tt_day=?;`;
+
+            let checkExistRawQuery = `
+            SELECT *
+            FROM able_ttimes
+            WHERE tt_tid=? AND tt_day=?;`;
+
             dataLength = data['new'].length;
             if(dataLength === 0) {
                 return;
             } else if(dataLength === 1) {
-                await db.query(rawQuery, [id, data['day'], data['startTime'], data['endTime']]);
+                let exist = await db.query(checkExistRawQuery, [id, data['day']]);
+                exist = exist[0][0];
+                if(exist != null) {
+                    let start = exist.tt_start;
+                    let end = exist.tt_end;
+
+                    //시간이 겹치는 게 아닐 때
+                    if(exist.tt_start > data['endTime'] || exist.tt_end < data['startTime']) {
+                        await db.query(insertRawQuery, [id, data['day'], data['startTime'], data['endTime']]);
+                        return;
+                    }
+                    //시간이 겹칠 때
+                    if(exist.tt_start > data['startTime']) start = data['startTime'];
+                    if(exist.tt_end < data['endTime']) end = data['endTime'];
+
+                    await db.query(updateRawQuery, [start, end, id, data['day']]);
+                    return;
+                }
+                await db.query(insertRawQuery, [id, data['day'], data['startTime'], data['endTime']]);
             } else {
                 for(let i = 0; i < dataLength; i++) {
-                    await db.query(rawQuery, [id, data['day'][i], data['startTime'][i], data['endTime'][i]]);
+                    let exist = await db.query(checkExistRawQuery, [id, data['day'][i]]);
+                    exist = exist[0][0];
+                    if(exist != null) {
+                        let start = exist.tt_start;
+                        let end = exist.tt_end;
+    
+                        //시간이 겹치는 게 아닐 때
+                        if(exist.tt_start > data['endTime'][i] || exist.tt_end < data['startTime'][i]) {
+                            await db.query(insertRawQuery, [id, data['day'][i], data['startTime'][i], data['endTime'][i]]);
+                            return;
+                        }
+                        //시간이 겹칠 때
+                        if(exist.tt_start > data['startTime'][i]) start = data['startTime'][i];
+                        if(exist.tt_end < data['endTime'][i]) end = data['endTime'][i];
+    
+                        await db.query(updateRawQuery, [start, end, id, data['day'][i]]);
+                        return;
+                    }
+                    await db.query(insertRawQuery, [id, data['day'][i], data['startTime'][i], data['endTime'][i]]);
                 }
             }
         } catch(err) {
@@ -94,9 +140,9 @@ module.exports = {
             for(let j = 0; j < appt.length; j++) {
                 apptList.push(appt[j]['tt_id']);
             }
-            console.log(apptList, data['ttId']);
-            for(let i = 0; i < data['ttId'].length; i++) {
-                if(data['ttId'].indexOf(String(apptList[i])) == -1) {
+            console.log(apptList, data['ttId'], data['new']);
+            for(let i = 0; i < apptList.length; i++) {
+                if((data['ttId'] === undefined && data['new'] === undefined) || (data['ttId'].indexOf(String(apptList[i])) == -1 && data['new'] === undefined)) {
                     // data 리스트에 없는 경우 : 삭제해야 함
                     await db.query(rawQuery, [apptList[i]]);
                 }
