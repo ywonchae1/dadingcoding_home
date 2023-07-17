@@ -6,7 +6,7 @@ module.exports = {
     getInfoById: async(id) => {
         try {
             let rawQuery = `
-            SELECT *
+            SELECT *, DATE_FORMAT(t_birth, '%Y-%m-%d') AS birth_format
             FROM teachers
             JOIN accounts
             ON t_id=id
@@ -22,7 +22,7 @@ module.exports = {
         try {
             let rawQuery = `
             SELECT c_id, c_tid, c_sid, c_datetime,
-            CASE WEEKDAY('20160118') 
+            CASE WEEKDAY(c_datetime)
             WHEN '0' THEN '월요일'
             WHEN '1' THEN '화요일'
             WHEN '2' THEN '수요일'
@@ -37,6 +37,7 @@ module.exports = {
             FROM classes
             WHERE c_tid=?`
             let res = await db.query(rawQuery, [id]);
+            console.log(res[0]);
             return res[0];
         } catch(err) {
             return err;
@@ -63,7 +64,6 @@ module.exports = {
             INSERT INTO able_ttimes (tt_tid, tt_day, tt_start, tt_end)
             VALUES (?, ?, ?, ?);
             `
-
             dataLength = data['new'].length;
             if(dataLength === 0) {
                 return;
@@ -95,7 +95,7 @@ module.exports = {
                 apptList.push(appt[j]['tt_id']);
             }
             console.log(apptList, data['ttId']);
-            for(let i = 0; i < apptList.length; i++) {
+            for(let i = 0; i < data['ttId'].length; i++) {
                 if(data['ttId'].indexOf(String(apptList[i])) == -1) {
                     // data 리스트에 없는 경우 : 삭제해야 함
                     await db.query(rawQuery, [apptList[i]]);
