@@ -13,76 +13,76 @@
       <div class="d-grid my-5">
         <div class="row mb-5">
           <div class="col fs-4">되는 시간 선택</div>
-          <div class="col"><button class="btn-blue-light" type="submit" form="all">전체 등록</button></div>
+          <div class="col"><button id='appt-all' class="btn-blue-light" type="submit">전체 등록</button></div>
         </div>
         <div class="row p-2">
           <div class="col-1 week">
-            <input name="weekday" type="text" value="6" hidden>일
+            <input name="wday" type="text" value="6" hidden>일
           </div>
           <div class="col">
-            <input id="sun_start" type="time"><label>&nbsp;<i class="ri-arrow-right-line"></i>&nbsp;</label><input
-              id="sun_end" type="time">
-            <button id="sundaySchedule" class="plus" type="submit"><i class="ri-add-circle-line"></i></button>
-          </div>
-        </div>
-        <div class="row p-2">
-          <div class="col-1 week">
-            <input name="weekday" type="text" value="0" hidden>월
-          </div>
-          <div class="col">
-            <input id="mon_start" type="time"><label>&nbsp;<i class="ri-arrow-right-line"></i>&nbsp;</label><input
-              id="mon_end" type="time">
-            <button id="mondaySchedule" class="plus"><i class="ri-add-circle-line"></i></button>
+            <input id="sun_start" type="time" name="sun-s"><label>&nbsp;<i class="ri-arrow-right-line"></i>&nbsp;</label><input
+              id="sun_end" type="time" name="sun-e">
+            <button id="sundaySchedule" class="plus" type="button"><i class="ri-add-circle-line"></i></button>
           </div>
         </div>
         <div class="row p-2">
           <div class="col-1 week">
-            <input name="weekday" type="text" value="1" hidden>화
+            <input name="wday" type="text" value="0" hidden>월
           </div>
           <div class="col">
-            <input id="tue_start" type="time"><label>&nbsp;<i class="ri-arrow-right-line"></i>&nbsp;</label><input
-              id="tue_end" type="time">
-            <button id="tuesdaySchedule" class="plus"><i class="ri-add-circle-line"></i></button>
+            <input id="mon_start" type="time" name="mon-s"><label>&nbsp;<i class="ri-arrow-right-line"></i>&nbsp;</label><input
+              id="mon_end" type="time" name="mon-e">
+            <button id="mondaySchedule" class="plus" type="button"><i class="ri-add-circle-line"></i></button>
           </div>
         </div>
         <div class="row p-2">
           <div class="col-1 week">
-            <input name="weekday" type="text" value="2" hidden>수
+            <input name="wday" type="text" value="1" hidden>화
           </div>
           <div class="col">
-            <input id="wed_start" type="time"><label>&nbsp;<i class="ri-arrow-right-line"></i>&nbsp;</label><input
-              id="wed_end" type="time">
-            <button id="wednesdaySchedule" class="plus"><i class="ri-add-circle-line"></i></button>
+            <input id="tue_start" type="time" name="thu-s"><label>&nbsp;<i class="ri-arrow-right-line"></i>&nbsp;</label><input
+              id="tue_end" type="time" name="thu-e">
+            <button id="tuesdaySchedule" class="plus" type="button"><i class="ri-add-circle-line"></i></button>
           </div>
         </div>
         <div class="row p-2">
           <div class="col-1 week">
-            <input name="weekday" type="text" value="3" hidden>목
+            <input name="wday" type="text" value="2" hidden>수
           </div>
           <div class="col">
-            <input id="thu_start" type="time"><label>&nbsp;<i class="ri-arrow-right-line"></i>&nbsp;</label><input
-              id="thu_end" type="time">
-            <button id="thursdaySchedule" class="plus"><i class="ri-add-circle-line"></i></button>
+            <input id="wed_start" type="time" name="wed-s"><label>&nbsp;<i class="ri-arrow-right-line"></i>&nbsp;</label><input
+              id="wed_end" type="time" name="wed-e">
+            <button id="wednesdaySchedule" class="plus" type="button"><i class="ri-add-circle-line"></i></button>
           </div>
         </div>
         <div class="row p-2">
           <div class="col-1 week">
-            <input name="weekday" type="text" value="4" hidden>금
+            <input name="wday" type="text" value="3" hidden>목
           </div>
           <div class="col">
-            <input id="fri_start" type="time"><label>&nbsp;<i class="ri-arrow-right-line"></i>&nbsp;</label><input
-              id="fri_end" type="time">
-            <button id="fridaySchedule" class="plus"><i class="ri-add-circle-line"></i></button>
+            <input id="thu_start" type="time" name="thr-s"><label>&nbsp;<i class="ri-arrow-right-line"></i>&nbsp;</label><input
+              id="thu_end" type="time" name="thr-e">
+            <button id="thursdaySchedule" class="plus" type="button"><i class="ri-add-circle-line"></i></button>
           </div>
         </div>
         <div class="row p-2">
           <div class="col-1 week">
-            <input name="weekday" type="text" value="5" hidden>토
+            <input name="wday" type="text" value="4" hidden>금
           </div>
           <div class="col">
-            <input id="sat_start" type="time"><label>&nbsp;<i class="ri-arrow-right-line"></i>&nbsp;</label><input
-              id="sat_end" type="time">
-            <button id="saturdaySchedule" class="plus"><i class="ri-add-circle-line"></i></button>
+            <input id="fri_start" type="time" name="fri-s"><label>&nbsp;<i class="ri-arrow-right-line"></i>&nbsp;</label><input
+              id="fri_end" type="time" name="fri-e">
+            <button id="fridaySchedule" class="plus" type="button"><i class="ri-add-circle-line"></i></button>
+          </div>
+        </div>
+        <div class="row p-2">
+          <div class="col-1 week">
+            <input name="wday" type="text" value="5" hidden>토
+          </div>
+          <div class="col">
+            <input id="sat_start" type="time" name="sat-s"><label>&nbsp;<i class="ri-arrow-right-line"></i>&nbsp;</label><input
+              id="sat_end" type="time" name="sat-e">
+            <button id="saturdaySchedule" class="plus" type="button"><i class="ri-add-circle-line"></i></button>
           </div>
         </div>
       </div>
