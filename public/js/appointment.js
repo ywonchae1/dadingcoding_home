@@ -235,4 +235,31 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
     });
+
+    const startTimeInputIds = ['#sun_start', '#mon_start', '#tue_start', '#wed_start', '#thu_start', '#fri_start', '#sat_start'];
+    const endTimeInputIds = ['#sun_end', '#mon_end', '#tue_end', '#wed_end', '#thu_end', '#fri_end', '#sat_end'];
+    const weekdayKo = ['일', '월', '화', '수', '목', '금', '토'];
+
+    const btnAddAll = document.getElementById('appt-all');
+    btnAddAll.addEventListener('click', () => {
+        for(let i = 0; i < 7; i++) {
+            const start = document.querySelector(startTimeInputIds[i]);
+            const end = document.querySelector(endTimeInputIds[i]);
+            if((start.value < end.value) && (start.value !== '' && end.value !== '')) {
+                let newElement = document.createElement('div');
+                newElement.innerHTML = (`<div class='delete-item'><div class="row p-2">
+                <input type="text" name="new" hidden value="${cnt++}">
+                <input type="text" name="day" hidden value="${weekdayKo[i]}">
+                <input type='text' name='startTime' hidden value='${start.value}'>
+                <input type='text' name='endTime' hidden value='${end.value}'>
+                <div class="col">${weekdayKo[i]}&nbsp;&nbsp;${start.value}&nbsp;<i class="ri-arrow-right-line"></i>&nbsp;${end.value}</div>
+                <div class="col"><button type='button' class="delete"><i class="ri-delete-bin-line"></i></button></div>
+                </div></div>`);
+                let newAvailableElement = document.querySelector('#newAvailable');
+                newAvailableElement.appendChild(newElement);
+            }
+            start.value = null;
+            end.value = null;
+        }
+    });
 });
