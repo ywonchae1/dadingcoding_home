@@ -1,0 +1,18 @@
+<div class="d-flex">
+   <%- include('./sidebar.ejs') %>
+    <div class="content-mypage">
+        <h1 class="fs-1 fw-bold title">
+            <% if(tWho) { %>
+                <% tWho.forEach(who => { %>
+                    <%= who %>님 
+                <% }); %>
+            <% } %>
+            <% if(sWho) { %>
+                <% sWho.forEach(who => { %>
+                    <%= who %>님 
+                <% }); %>
+            <% } %>
+        </h1>
+        <h1 class="fs-3 fw-bold title">위 회원들에게 수업 가능한 시간(120분)이 없어 매칭에 실패하였습니다.</h1>
+    </div>
+</div>
