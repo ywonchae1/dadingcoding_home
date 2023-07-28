@@ -114,18 +114,19 @@ addAllBtn.addEventListener('click', () => {
         let startTimeClass = filledTimeBox[i].classList[1];
         let day = startTimeClass.slice(0, 3);
         start_time = DBTimeString(startTimeClass);
-        let endTimeClass = filledTimeBox[i].classList[1];
-        end_time = DBTimeString(endTimeClass);
+        // let endTimeClass = filledTimeBox[i].classList[1];
+        // end_time = DBTimeString(endTimeClass);
 
         for(let j = i + 1; j < filledTimeBox.length; j++) {
             let lastTimeClass = filledTimeBox[j-1].classList[1];
             let nextTimeClass = filledTimeBox[j].classList[1];
-            if(lastTimeClass.slice(0, 3) != nextTimeClass.slice(0, 3)
-            || hourToMin(lastTimeClass) + 30 != hourToMin(nextTimeClass)) {
+            if(lastTimeClass.slice(0, 3) !== nextTimeClass.slice(0, 3)
+            || hourToMin(lastTimeClass) + 30 !== hourToMin(nextTimeClass)) {
                 end_time = DBTimeString(lastTimeClass);
                 i = j - 1;
                 break;
-            } else if(j + 1 === filledTimeBox.length) {
+            }
+            else if(j + 1 === filledTimeBox.length) {
                 end_time = DBTimeString(nextTimeClass);
                 i = j - 1;
                 break;
@@ -157,14 +158,16 @@ addAllBtn.addEventListener('click', () => {
                 break;
         }
 
-        timeContainer.innerHTML += `<div class='delete-item'><div class="row p-2">
-        <input type="text" name="day" hidden value="${day}">
-        <input type='text' name='startTime' hidden value='${start_time}'>
-        <input type='text' name='endTime' hidden value='${end_time}'>
-        <div class="col">${day}&nbsp;&nbsp;${start_time}&nbsp;<i
-          class="ri-arrow-right-line"></i>&nbsp;${end_time}</div>
-          <div class="col"><button type='button' class="delete"><i class="ri-delete-bin-line"></i></button></div>
-        </div></div>`;
+        if(end_time) {
+            timeContainer.innerHTML += `<div class='delete-item'><div class="row p-2">
+            <input type="text" name="day" hidden value="${day}">
+            <input type='text' name='startTime' hidden value='${start_time}'>
+            <input type='text' name='endTime' hidden value='${end_time}'>
+            <div class="col">${day}&nbsp;&nbsp;${start_time}&nbsp;<i
+            class="ri-arrow-right-line"></i>&nbsp;${end_time}</div>
+            <div class="col"><button type='button' class="delete"><i class="ri-delete-bin-line"></i></button></div>
+            </div></div>`;
+        }
     }
 
     deleteButtons = document.querySelectorAll('.delete-item');
