@@ -71,7 +71,6 @@ function hourToMin(timeString) {
     if(timeString.length === 7) {
         result += Number(timeString.slice(5, 7));
     }
-    console.log(result);
     return result;
 }
 
